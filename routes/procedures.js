@@ -9,12 +9,10 @@ const procedureFuncs = require("../controllers/procedureController.js");
 // } from "../controllers/procedureController.js";
 
 
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
 
+router.route("/").get(procedureFuncs.getProcedures);
 router.route("/:id").get(procedureFuncs.getProcedureById).delete(procedureFuncs.DeleteProcedure);
-router.route("/create").post(procedureFuncs.CreateProcedure);
+router.route("/").post(procedureFuncs.CreateProcedure);
 
 
 module.exports = router;

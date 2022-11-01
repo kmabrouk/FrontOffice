@@ -3,6 +3,15 @@ const Procedure = require("../models/procedureModel");
 //@description     Fetch single Procedure
 //@route           GET /api/procedures/:id
 //@access          Public
+const getProcedures = async (req, res) => {
+  const procedure = await Procedure.find();
+  if (procedure) {
+    return res.json(procedure);
+  } else {
+    return res.status(404).json("Procedures not found");
+  }
+};
+
 const getProcedureById = async (req, res) => {
   const procedure = await Procedure.findById(req.params.id);
   if (procedure) {
@@ -47,4 +56,4 @@ const DeleteProcedure = async (req, res) => {
   }
 };
 
-module.exports = { getProcedureById, CreateProcedure, DeleteProcedure };
+module.exports = { getProcedures, getProcedureById, CreateProcedure, DeleteProcedure };

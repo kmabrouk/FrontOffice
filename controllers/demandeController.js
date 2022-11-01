@@ -3,6 +3,15 @@ const Demande = require("../models/demandeModel");
 //@description     Fetch single Demande
 //@route           GET /api/demandes/:id
 //@access          Public
+const getDemandes = async (req, res) => {
+  const demande = await Demande.find();
+  if (demande) {
+    return res.json(demande);
+  } else {
+    return res.status(404).json("Demandes not found");
+  }
+};
+
 const getDemandeById = async (req, res) => {
   const demande = await Demande.findById(req.params.id);
   if (demande) {
@@ -46,4 +55,4 @@ const DeleteDemande = async (req, res) => {
   }
 };
 
-module.exports = { getDemandeById, CreateDemande, DeleteDemande };
+module.exports = { getDemandes, getDemandeById, CreateDemande, DeleteDemande };
