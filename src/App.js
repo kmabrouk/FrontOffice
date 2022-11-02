@@ -5,13 +5,14 @@ import "boxicons/css/boxicons.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import Blank from "./pages/Blank";
+import NewDemande from "./pages/NewDemande";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route path="/newDemande" element={<Blank />} />
+          <Route path="/newDemande" element={<NewDemande />} />
           <Route path="/myDemandes" element={<Blank />} />
           {/* <Route path="/calendar" element={<Blank />} />
           <Route path="/user" element={<Blank />} />
