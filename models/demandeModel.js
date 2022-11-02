@@ -12,6 +12,14 @@ var DemandeSchema = new Schema({
     procedureId: {
       type: String,
     },
+    documents: [{
+      nom: {
+        type: String
+      },
+      doc: {
+        type: String //!!!!!
+      }
+    }]
   });
   
 module.exports = mongoose.model("Demande", DemandeSchema);

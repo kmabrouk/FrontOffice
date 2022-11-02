@@ -6,6 +6,11 @@ var ProcedureSchema = new Schema({
     type: String,
     required: true,
   },
+  documents: [{
+    nom_doc: {
+      type: String
+    }
+  }]
 });
 
 module.exports = mongoose.model("Procedure", ProcedureSchema);
