@@ -1,7 +1,7 @@
 const Procedure = require("../models/procedureModel");
 
-//@description     Fetch single Procedure
-//@route           GET /api/procedures/:id
+//@description     Fetch Procedure
+//@route           GET /api/procedures/
 //@access          Public
 const getProcedures = async (req, res) => {
   const procedure = await Procedure.find();
@@ -41,14 +41,27 @@ const CreateProcedure = async (req, res) => {
   }
 };
 
+//@description     Modift single procedure
+//@route           PUT /api/procedures/:id
+//@access          Private
+const modifyProcedure = async (req, res) => {
+  console.log(req.body);
+  const procedure = await Procedure.findByIdAndUpdate(req.params.id, {nom: req.body.nom});
+  if (procedure) {
+    return res.json(procedure);
+  } else {
+    return res.status(404).json("Procedure not found");
+  }
+};
+
 //@description     Delete single Procedure
 //@route           GET /api/Procedures/:id
 //@access          Private
 const DeleteProcedure = async (req, res) => {
-  const proc = await Procedure.findById(req.params.id);
+  const procedure = await Procedure.findById(req.params.id);
 
   if (procedure) {
-    await proc.remove();
+    await procedure.remove();
     res.json("Procedure Removed");
   } else {
     res.status(404);
@@ -56,4 +69,4 @@ const DeleteProcedure = async (req, res) => {
   }
 };
 
-module.exports = { getProcedures, getProcedureById, CreateProcedure, DeleteProcedure };
+module.exports = { getProcedures, getProcedureById, CreateProcedure, modifyProcedure, DeleteProcedure };

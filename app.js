@@ -7,6 +7,7 @@ require("./conn");
 
 var procedureRoutes = require("./routes/procedures");
 var demandeRoutes = require("./routes/demandes");
+var citoyenRoutes = require("./routes/citoyens");
 
 var indexRouter = require("./routes/index");
 // var usersRouter = require('./routes/users');
@@ -16,6 +17,7 @@ var app = express();
 app.use(express.json()); // to accept json data
 app.use("/procedures", procedureRoutes);
 app.use("/demandes", demandeRoutes);
+app.use("/citoyens", citoyenRoutes);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

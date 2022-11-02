@@ -33,10 +33,24 @@ const CreateDemande = async (req, res) => {
   } else {
     const demande = new Demande({
       nom:body.nom,
+      procedure:body.procedure,
+      procedureId:body.procedureId
     });
     const createdDemande = await demande.save();
 
     res.status(201).json(createdDemande);
+  }
+};
+
+//@description     Modift single demande
+//@route           PUT /api/demandes/:id
+//@access          Private
+const modifyDemande = async (req, res) => {
+  const demande = await Demande.findByIdAndUpdate(req.params.id, {nom: req.body.nom, procedure: req.body.procedure});
+  if (demande) {
+    return res.json(demande);
+  } else {
+    return res.status(404).json("Demande not found");
   }
 };
 
@@ -47,7 +61,7 @@ const DeleteDemande = async (req, res) => {
   const demande = await Demande.findById(req.params.id);
 
   if (demande) {
-    await proc.remove();
+    await demande.remove();
     res.json("Demande Removed");
   } else {
     res.status(404);
@@ -55,4 +69,4 @@ const DeleteDemande = async (req, res) => {
   }
 };
 
-module.exports = { getDemandes, getDemandeById, CreateDemande, DeleteDemande };
+module.exports = { getDemandes, getDemandeById, CreateDemande, modifyDemande, DeleteDemande };
