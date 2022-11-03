@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { desktop , tablet } from "../theme/globalStyles";
+import { desktop, tablet } from "../theme/globalStyles";
 
 export const Table = styled.table`
   border-collapse: collapse;
@@ -11,20 +11,22 @@ export const Table = styled.table`
   @media screen and (min-width: ${desktop}) {
     justify-content: start;
     font-weight: 800;
-}
+  }
 `;
 
-
 export const Thead = styled.thead`
-    background-color: var(--violet);
-    color: var(--white);
+  background-color: #308efe;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 `;
 
 export const Tbody = styled.tbody``;
 
 export const Tr = styled.tr`
-height: 2.833rem;
-@media screen and (min-width: ${desktop}) {
+  height: 2.833rem;
+  @media screen and (min-width: ${desktop}) {
     height: 3.625rem;
   }
 `;
@@ -36,50 +38,49 @@ export const Th = styled.th`
   white-space: nowrap;
   font-size: 1.025rem;
   padding: 0rem 0rem 0 1.5rem;
-  text-align:left;
-  &:last-child{
-    text-align:center;
+  text-align: left;
+  &:last-child {
+    text-align: center;
   }
   @media screen and (max-width: ${tablet}) {
     text-align: left;
     &.hide {
-    display:none;
-  }
+      display: none;
+    }
   }
 `;
 export const Td = styled.td`
-
   font-size: 0.875rem;
   padding: 0rem 0rem 0 1.5rem;
-  &:last-child{
-    text-align:center;
+  &:last-child {
+    text-align: center;
   }
   @media screen and (max-width: ${tablet}) {
     &.hide {
-    display:none;
-  }
+      display: none;
+    }
   }
   @media screen and (min-width: ${desktop}) {
     font-size: 1rem;
     line-height: 1.313rem;
-    text-align:left;
+    text-align: left;
     padding: 0rem 0rem 0 1.75rem;
     white-space: nowrap;
 
     &.terrain {
-    display:flex;
-    justify-content: start;
-    align-items:center;
-    div {
-      background-color: var(--gray-200);
-      width:3.5rem;
-      height:3.5rem;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      div {
+        background-color: var(--gray-200);
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+    }
+    &:last-child {
+      text-align: center;
     }
   }
-  &:last-child{
-    text-align:center;
-  }
-}
 `;
 
 export const Button = styled.button`
@@ -91,18 +92,18 @@ export const Button = styled.button`
   border: 1px solid var(--gray-500);
   border-radius: 0.41rem;
   background-color: var(--white);
-  &.admin{
+  &.admin {
     width: 1.625rem;
     height: 1.625rem;
     &:not(:last-child) {
       margin-right: 0.5rem;
     }
-    border-color:var(--white);
+    border-color: var(--white);
     &.delete {
-      background-color:var(--red);
+      background-color: var(--red);
     }
     &.edit {
-      background-color:var(--gray-300);
+      background-color: var(--gray-300);
     }
   }
 `;
@@ -129,38 +130,38 @@ export const Wrapper = styled.div`
     align-items: center;
     margin-bottom: 5rem;
     font-size: 0.75rem;
-    gap: 0.563rem; 
+    gap: 0.563rem;
   }
   .pagination .page-num {
     padding: 0.188rem;
     cursor: pointer;
     font-weight: 700;
   }
-  .pagination .active{
+  .pagination .active {
     text-decoration: underline;
     color: var(--violet);
   }
   @media screen and (min-width: ${tablet}) {
-  svg {
-    font-size: 1.3rem;
-  }
-  .pagination {
-    font-size: 0.75rem;
-  }
-  
-  .pagination .page-num {
-    padding: 0.313rem;
-  }
-}
-  @media screen and (min-width: ${desktop}) {
     svg {
-    font-size: 1.7rem;
+      font-size: 1.3rem;
     }
     .pagination {
-    font-size: 1rem;
+      font-size: 0.75rem;
+    }
+
+    .pagination .page-num {
+      padding: 0.313rem;
+    }
   }
-  .pagination .page-num {
-    padding: 0.5rem 0.375rem;
+  @media screen and (min-width: ${desktop}) {
+    svg {
+      font-size: 1.7rem;
+    }
+    .pagination {
+      font-size: 1rem;
+    }
+    .pagination .page-num {
+      padding: 0.5rem 0.375rem;
+    }
   }
-}
-`
+`;
