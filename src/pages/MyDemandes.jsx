@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ReactPaginate from "react-paginate";
+import { AiFillDelete } from "react-icons/ai";
+import { HiPencilAlt } from "react-icons/hi";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -71,7 +73,7 @@ const MyDemandes = () => {
     {
       _id: "6362ae0693115709036400fe",
       nom: "Demande d'acte de mariage",
-      procedure: "Mariage",
+      procedure: "koko",
       procedureId: "6362abeca786444a8dea2b47",
       __v: 0,
     },
@@ -108,8 +110,12 @@ const MyDemandes = () => {
               <Td>{row.procedure}</Td>
               <Td>{row.procedureId}</Td>
               <Td>
+                <Link to={`/modifyDemande/${row.procedureId}`}>
+                <HiPencilAlt color="#49be25" size="25px"/>
+                </Link>
+                <span> </span>
                 <Link to="/">
-                  <BsFillArrowRightCircleFill color="#308efe" size="25px"/>
+                <AiFillDelete color="red" size="25px"/>
                 </Link>
               </Td>
             </Tr>
@@ -119,12 +125,12 @@ const MyDemandes = () => {
       <Wrapper>
         <ReactPaginate
           breakLabel="..."
-          nextLabel={<BsFillArrowRightCircleFill color="#308efe"/>}
+          nextLabel={<BsFillArrowRightCircleFill color="#308efe" />}
           onPageChange={handlePageClick}
           pageRangeDisplayed={0}
           marginPagesDisplayed={2}
           pageCount={pageCount}
-          previousLabel={<BsFillArrowLeftCircleFill color="#308efe"/>}
+          previousLabel={<BsFillArrowLeftCircleFill color="#308efe" />}
           renderOnZeroPageCount={null}
           containerClassName="pagination"
           pageLinkClassName="page-num"

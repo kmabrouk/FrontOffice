@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import MyDemandes from "./pages/MyDemandes";
 import NewDemande from "./pages/NewDemande";
+import ModifyDemande from "./pages/ModifyDemande";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/user" element={<Blank />} />
           <Route path="/order" element={<Blank />} /> */}
         </Route>
+        <Route path="/modifyDemande/:id" element={<ModifyDemande />} />
       </Routes>
     </BrowserRouter>
   );

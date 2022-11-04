@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const NewDemande = () => {
   const [procedures, setProcedures] = useState([]);
   const [nomDem, setNomDem] = useState("");
   const [procedure, setProcedure] = useState("");
-  const [file, setFile] = useState(null);
 
   useEffect(() => {
     requestProcedures();
@@ -23,7 +23,7 @@ const NewDemande = () => {
     <div className="DemandePage">
       <form>
         <label htmlFor="nomDem">
-          Nom demande:
+          Nouveau nom demande:
           <input
             id="nomDem"
             value={nomDem}
@@ -33,7 +33,7 @@ const NewDemande = () => {
         </label>
         <br />
         <label htmlFor="procedure">
-          Procedure
+          Nouvelle procedure
           <select
             id="procedure"
             value={procedure}
@@ -52,17 +52,15 @@ const NewDemande = () => {
             ))}
           </select>
         </label>
-        <label htmlFor="file">
-          fichier 1:
-          <input
-          type="file"
-          
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
-        </label>
         <br />
-        <button className="button">Submit</button>
+        <div className="buttons">
+          <Link to="/">
+            <button style={{ background: "green" }}>Modifier</button>
+          </Link>
+          <Link to="/myDemandes">
+            <button style={{ background: "red" }}>Annuler</button>
+          </Link>
+        </div>
       </form>
     </div>
   );
