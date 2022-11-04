@@ -10,3 +10,6 @@ coverage/
 sonarqube/extensions
 sonarqube/data
 sonarqube/logs
+back-end/sonarqube/extensions
+back-end/sonarqube/data
+back-end/sonarqube/logs

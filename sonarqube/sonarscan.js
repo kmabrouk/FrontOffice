@@ -3,7 +3,7 @@ const scanner = require("sonarqube-scanner");
 scanner(
   {
     serverUrl: "http://localhost:9000",
-    token: "5ac4f7a81511547097b17a731ee5cf2fdcc0fd73",
+    token: "sqp_70e7b9b3049a0173e6bf0154ecb57103bce29ee3",
     options: {
       "sonar.projectName": "FrontOffice-citoyen",
       "sonar.projectDescription": "premier incrément",

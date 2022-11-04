@@ -4,10 +4,13 @@ let Schema = mongoose.Schema;
 let DemandeSchema = new Schema({
     nom: {
       type: String,
-      required: true,
+      required: true
     },
     procedure: {
-      type: String,
+      type: String
+    },
+    ownerCIN: {
+      type: String
     },
     documents: {
       type: [String]
