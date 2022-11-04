@@ -9,9 +9,6 @@ var DemandeSchema = new Schema({
     procedure: {
       type: String,
     },
-    procedureId: {
-      type: String,
-    },
     documents: [{
       nom: {
         type: String
