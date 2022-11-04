@@ -1,14 +1,15 @@
-var express = require('express');
-const app = express();
-var router = express.Router();
+let express = require('express');
+let app1 = express();
+app1.disable("x-powered-by");
+
+let helmet = require("helmet");
+let app = express();
+app.use(helmet.hidePoweredBy());
+let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
-// app.listen(8000, () => {
-// 	console.log("Server started at port 8000");
-// });
 
 module.exports = router;

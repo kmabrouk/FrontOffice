@@ -29,7 +29,6 @@ const CreateCitoyen = async (req, res) => {
   if (!body) {
     res.status(400);
     throw new Error("Please Fill all the feilds");
-    return;
   } else {
     const citoyen = new Citoyen({
       nom:body.nom,
@@ -60,7 +59,7 @@ const modifyCitoyen = async (req, res) => {
 //@route           GET /api/citoyens/:id
 //@access          Private
 const DeleteCitoyen = async (req, res) => {
-  const citoyen = await Citoyen.findById(req.params.id);
+  const citoyen = Citoyen.findById(req.params.id);
 
   if (citoyen) {
     await citoyen.remove();

@@ -29,7 +29,6 @@ const CreateProcedure = async (req, res) => {
   if (!body) {
     res.status(400);
     throw new Error("Please Fill all the feilds");
-    return;
   } else {
     const proc = new Procedure({
       nom:body.nom,
@@ -58,7 +57,7 @@ const modifyProcedure = async (req, res) => {
 //@route           GET /api/Procedures/:id
 //@access          Private
 const DeleteProcedure = async (req, res) => {
-  const procedure = await Procedure.findById(req.params.id);
+  const procedure = Procedure.findById(req.params.id);
 
   if (procedure) {
     await procedure.remove();

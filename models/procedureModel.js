@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var ProcedureSchema = new Schema({
+let ProcedureSchema = new Schema({
   nom: {
     type: String,
     required: true,

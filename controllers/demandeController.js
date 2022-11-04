@@ -1,11 +1,4 @@
 const Demande = require("../models/demandeModel");
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
-
-
-app.use(methodOverride('_method'));
 
 
 //@description     Fetch single Demande
@@ -37,12 +30,11 @@ const CreateDemande = async (req, res) => {
   if (!body) {
     res.status(400);
     throw new Error("Please Fill all the feilds");
-    return;
   } else {
     const demande = new Demande({
       nom:body.nom,
       procedure:body.procedure,
-      procedureId:body.procedureId
+      documents: body.documents
     });
     const createdDemande = await demande.save();
 
@@ -54,7 +46,8 @@ const CreateDemande = async (req, res) => {
 //@route           PUT /api/demandes/:id
 //@access          Private
 const modifyDemande = async (req, res) => {
-  const demande = await Demande.findByIdAndUpdate(req.params.id, {nom: req.body.nom, procedure: req.body.procedure});
+  const demande = await Demande.findByIdAndUpdate(req.params.id, {nom: req.body.nom, procedure: req.body.procedure,
+    documents: req.body.documents});
   if (demande) {
     return res.json(demande);
   } else {
@@ -66,7 +59,7 @@ const modifyDemande = async (req, res) => {
 //@route           GET /api/demandes/:id
 //@access          Private
 const DeleteDemande = async (req, res) => {
-  const demande = await Demande.findById(req.params.id);
+  const demande = Demande.findById(req.params.id);
 
   if (demande) {
     await demande.remove();

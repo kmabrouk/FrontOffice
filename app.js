@@ -1,18 +1,22 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+let createError = require("http-errors");
+let express = require("express");
+let path = require("path");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
 require("./conn");
 
-var procedureRoutes = require("./routes/procedures");
-var demandeRoutes = require("./routes/demandes");
-var citoyenRoutes = require("./routes/citoyens");
+let procedureRoutes = require("./routes/procedures");
+let demandeRoutes = require("./routes/demandes");
+let citoyenRoutes = require("./routes/citoyens");
 
-var indexRouter = require("./routes/index");
-// var usersRouter = require('./routes/users');
+let indexRouter = require("./routes/index");
 
-var app = express();
+let app1 = express();
+app1.disable("x-powered-by");
+
+let helmet = require("helmet");
+let app = express();
+app.use(helmet.hidePoweredBy());
 
 app.use(express.json()); // to accept json data
 app.use("/procedures", procedureRoutes);
@@ -30,7 +34,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-// app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

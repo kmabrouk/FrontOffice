@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var DemandeSchema = new Schema({
+let DemandeSchema = new Schema({
     nom: {
       type: String,
       required: true,
@@ -9,14 +9,9 @@ var DemandeSchema = new Schema({
     procedure: {
       type: String,
     },
-    documents: [{
-      nom: {
-        type: String
-      },
-      doc: {
-        type: String //!!!!!
-      }
-    }]
+    documents: {
+      type: [String]
+    }
   });
   
 module.exports = mongoose.model("Demande", DemandeSchema);
