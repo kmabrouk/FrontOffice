@@ -1,0 +1,11 @@
+node_modules
+.parcel-cache/
+dist/
+.env
+.DS_Store
+coverage/
+.vscode/
+.scannerwork
+sonarqube/extensions
+sonarqube/data
+sonarqube/logs
