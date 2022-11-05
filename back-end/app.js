@@ -7,9 +7,6 @@ require("./conn");
 const cors=require("cors");
 
 
-var cors = require('cors');
-
-
 let procedureRoutes = require("./routes/procedures");
 let demandeRoutes = require("./routes/demandes");
 let citoyenRoutes = require("./routes/citoyens");
@@ -22,7 +19,7 @@ app1.disable("x-powered-by");
 let helmet = require("helmet");
 let app = express();
 app.use(helmet.hidePoweredBy());
-// app.use(cors());
+app.use(cors());
 app.use(express.json()); // to accept json data
 
 app.use("/procedures", procedureRoutes);

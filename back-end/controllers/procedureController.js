@@ -12,6 +12,16 @@ const getProcedures = async (req, res) => {
   }
 };
 
+const getProceduresByName = async (req, res) => {
+  console.log(req.params.nom);
+  const procedure = await Procedure.find({nom: req.params.nom});
+  if (procedure) {
+    return res.json(procedure);
+  } else {
+    return res.status(404).json("Procedures not found");
+  }
+};
+
 const getProcedureById = async (req, res) => {
   const procedure = await Procedure.findById(req.params.id);
   if (procedure) {
@@ -69,4 +79,4 @@ const DeleteProcedure = async (req, res) => {
   }
 };
 
-module.exports = { getProcedures, getProcedureById, CreateProcedure, modifyProcedure, DeleteProcedure };
+module.exports = { getProcedures, getProcedureById, getProceduresByName, CreateProcedure, modifyProcedure, DeleteProcedure };

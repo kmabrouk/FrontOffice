@@ -35,6 +35,7 @@ const CreateCitoyen = async (req, res) => {
       prenom:body.prenom,
       cin:body.cin,
       demandes:body.demandes,
+      password:body.password
     });
     const createdCitoyen = await citoyen.save();
 

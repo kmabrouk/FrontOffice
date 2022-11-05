@@ -14,6 +14,11 @@ let CitoyenSchema = new Schema({
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      required: true,
+      select: false
+    },
     demandes: [{
         id : String,
         nom : String,

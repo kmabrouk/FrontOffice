@@ -5,6 +5,7 @@ const procedureFuncs = require("../controllers/procedureController.js");
 
 
 router.route("/").get(procedureFuncs.getProcedures);
+router.route("/nom/:nom").get(procedureFuncs.getProceduresByName);
 router.route("/:id").get(procedureFuncs.getProcedureById).delete(procedureFuncs.DeleteProcedure);
 router.route("/").post(procedureFuncs.CreateProcedure);
 router.route("/:id").get(procedureFuncs.getProcedureById).put(procedureFuncs.modifyProcedure);
