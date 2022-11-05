@@ -6,6 +6,10 @@ let logger = require("morgan");
 require("./conn");
 const cors=require("cors");
 
+
+var cors = require('cors');
+
+
 let procedureRoutes = require("./routes/procedures");
 let demandeRoutes = require("./routes/demandes");
 let citoyenRoutes = require("./routes/citoyens");
