@@ -32,6 +32,7 @@ const CreateProcedure = async (req, res) => {
   } else {
     const proc = new Procedure({
       nom:body.nom,
+      documents:body.documents
     });
 
     const createdProc = await proc.save();
