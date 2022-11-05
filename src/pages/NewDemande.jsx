@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import useFilesList from "../components/useFilesList";
 
 const NewDemande = () => {
   const [procedures, setProcedures] = useState([]);
   const [nomDem, setNomDem] = useState("");
   const [procedure, setProcedure] = useState("");
-  const [file, setFile] = useState(null);
+  const filesList = useFilesList(procedure);
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     requestProcedures();
@@ -35,10 +37,10 @@ const NewDemande = () => {
             id="procedure"
             value={procedure}
             onChange={(e) => {
-              setProcedure(e.target.value);
+              setProcedure(e.target.value.nom);
             }}
             onBlur={(e) => {
-              setProcedure(e.target.value);
+              setProcedure(e.target.value.nom);
             }}
           >
             <option />
@@ -49,10 +51,16 @@ const NewDemande = () => {
             ))}
           </select>
         </label>
-        <label htmlFor="file">
-          fichier 1:
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-        </label>
+        {!filesList.length ? (
+          <span></span>
+        ) : (
+          filesList.map((file) => (
+            <label htmlFor={file}>
+              {file}
+              <input type="file" />
+            </label>
+          ))
+        )}
         <br />
         <button className="button">Submit</button>
       </form>
