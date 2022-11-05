@@ -11,11 +11,8 @@ const NewDemande = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   //runs only on the first render
   async function requestProcedures() {
-    const res = await fetch(
-      `/procedures`
-    );
+    const res = await fetch(`http://localhost:3000/procedures`);
     const json = await res.json();
-
     setProcedures(json);
   }
 
@@ -54,12 +51,7 @@ const NewDemande = () => {
         </label>
         <label htmlFor="file">
           fichier 1:
-          <input
-          type="file"
-          
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
         </label>
         <br />
         <button className="button">Submit</button>
