@@ -11,12 +11,12 @@ let citoyenRoutes = require("./routes/citoyens");
 
 let indexRouter = require("./routes/index");
 
-let app1 = express();
-app1.disable("x-powered-by");
+// let app1 = express();
+// app1.disable("x-powered-by");
 
-let helmet = require("helmet");
+// let helmet = require("helmet");
 let app = express();
-app.use(helmet.hidePoweredBy());
+// app.use(helmet.hidePoweredBy());
 
 app.use(express.json()); // to accept json data
 app.use("/procedures", procedureRoutes);
