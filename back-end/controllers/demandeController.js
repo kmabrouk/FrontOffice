@@ -1,6 +1,5 @@
 const Demande = require("../models/demandeModel");
 
-
 //@description     Fetch single Demande
 //@route           GET /api/demandes/:id
 //@access          Public
@@ -70,4 +69,4 @@ const DeleteDemande = async (req, res) => {
   }
 };
 
-module.exports = { getDemandes, getDemandeById, CreateDemande, modifyDemande, DeleteDemande };
+module.exports = {getDemandes, getDemandeById, CreateDemande, modifyDemande, DeleteDemande };
