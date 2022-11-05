@@ -12,11 +12,11 @@ const NewDemande = () => {
   //runs only on the first render
   async function requestProcedures() {
     const res = await fetch(
-      `https://mocki.io/v1/1a2c4347-ae99-4212-9e87-10494f41875f`
+      `/procedures`
     );
     const json = await res.json();
 
-    setProcedures(json.procedures);
+    setProcedures(json);
   }
 
   return (

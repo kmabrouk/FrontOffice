@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const host = "mongodb+srv://amine:amine@cluster0.pdnsced.mongodb.net/frontoffice?retryWrites=true&w=majority";
+const host =
+  "mongodb+srv://root:0000@cluster0.pstfsvt.mongodb.net/frontoffice?retryWrites=true&w=majority";
 
 mongoose
   .connect(host)

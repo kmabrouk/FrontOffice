@@ -38,5 +38,6 @@
     "sonarqube-scanner": "^2.8.2",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.0"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
