@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import useFilesList from "../components/useFilesList";
 
 const NewDemande = () => {
   const [procedures, setProcedures] = useState([]);
   const [nomDem, setNomDem] = useState("");
   const [procedure, setProcedure] = useState("");
-  const filesList = useFilesList(procedure);
+  const [filesList, setFilesList] = useState({});
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
@@ -16,6 +15,26 @@ const NewDemande = () => {
     const res = await fetch(`http://localhost:3000/procedures`);
     const json = await res.json();
     setProcedures(json);
+  }
+
+  useEffect(() => {
+    if (procedure.length === 0) {
+      setFilesList([]);
+    } else {
+      requestFilesList();
+    }
+  }, [procedure]);
+
+  async function requestFilesList() {
+    setFilesList([]);
+    const res = await fetch(
+      `http://localhost:3000/procedures/nom/${procedure}`
+    );
+    const json = await res.json();
+    setFilesList(json);
+    filesList.map((element) => {
+      setFiles(element.documents);
+    });
   }
 
   return (
@@ -37,10 +56,10 @@ const NewDemande = () => {
             id="procedure"
             value={procedure}
             onChange={(e) => {
-              setProcedure(e.target.value.nom);
+              setProcedure(e.target.value);
             }}
             onBlur={(e) => {
-              setProcedure(e.target.value.nom);
+              setProcedure(e.target.value);
             }}
           >
             <option />
@@ -51,10 +70,10 @@ const NewDemande = () => {
             ))}
           </select>
         </label>
-        {!filesList.length ? (
+        {!files.length ? (
           <span></span>
         ) : (
-          filesList.map((file) => (
+          files.map((file) => (
             <label htmlFor={file}>
               {file}
               <input type="file" />
