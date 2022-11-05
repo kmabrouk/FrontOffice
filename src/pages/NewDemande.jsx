@@ -11,12 +11,16 @@ const NewDemande = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   //runs only on the first render
   async function requestProcedures() {
-    const res = await fetch(
-      `/procedures`
-    );
-    const json = await res.json();
+    try{
+      const res = await fetch(
+        "http://localhost:3000/procedures"
+      );
+      const json = await res.json();
 
-    setProcedures(json);
+      setProcedures(json);
+      }catch (e) {
+        console.log(e);
+      }
   }
 
   return (
