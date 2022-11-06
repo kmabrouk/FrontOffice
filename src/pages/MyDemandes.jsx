@@ -20,64 +20,18 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 const MyDemandes = () => {
-  const head = [
-    {
-      _id: "6362adfa93115709036400fc",
-      nom: "Demande d'acte de naissance",
-      procedure: "Naissance",
-      procedureId: "6362abf1a786444a8dea2b49",
-      __v: 0,
-    },
-    {
-      _id: "6362ae0693115709036400fe",
-      nom: "Demande d'acte de mariage",
-      procedure: "Mariage",
-      procedureId: "6362abeca786444a8dea2b47",
-      __v: 0,
-    },
-    {
-      _id: "6362adfa93115709036400fc",
-      nom: "Demande d'acte de naissance",
-      procedure: "Naissance",
-      procedureId: "6362abf1a786444a8dea2b49",
-      __v: 0,
-    },
-    {
-      _id: "6362ae0693115709036400fe",
-      nom: "Demande d'acte de mariage",
-      procedure: "Mariage",
-      procedureId: "6362abeca786444a8dea2b47",
-      __v: 0,
-    },
-    {
-      _id: "6362adfa93115709036400fc",
-      nom: "Demande d'acte de naissance",
-      procedure: "Naissance",
-      procedureId: "6362abf1a786444a8dea2b49",
-      __v: 0,
-    },
-    {
-      _id: "6362ae0693115709036400fe",
-      nom: "Demande d'acte de mariage",
-      procedure: "Mariage",
-      procedureId: "6362abeca786444a8dea2b47",
-      __v: 0,
-    },
-    {
-      _id: "6362adfa93115709036400fc",
-      nom: "Demande d'acte de naissance",
-      procedure: "Naissance",
-      procedureId: "6362abf1a786444a8dea2b49",
-      __v: 0,
-    },
-    {
-      _id: "6362ae0693115709036400fe",
-      nom: "Demande d'acte de mariage",
-      procedure: "koko",
-      procedureId: "6362abeca786444a8dea2b47",
-      __v: 0,
-    },
-  ];
+  const [head, setHead] = useState([]);
+
+  useEffect(() => {
+    requestDemandes();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  //runs only on the first render
+  async function requestDemandes() {
+    const res = await fetch(`http://localhost:3000/demandes`);
+    const json = await res.json();
+    setHead(json);
+  }
+
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -92,7 +46,7 @@ const MyDemandes = () => {
     const newOffset = (event.selected * itemsPerPage) % head.length;
     setItemOffset(newOffset);
   };
-  const mobileTab = ["nom", "procedure", "procedureId", ""];
+  const mobileTab = ["nom", "procedure", "documents", ""];
   return (
     <div>
       <Table>
@@ -108,14 +62,23 @@ const MyDemandes = () => {
             <Tr>
               <Td>{row.nom}</Td>
               <Td>{row.procedure}</Td>
-              <Td>{row.procedureId}</Td>
               <Td>
-                <Link to={`/modifyDemande/${row.procedureId}`}>
-                <HiPencilAlt color="#49be25" size="25px"/>
+                {row.documents.map(
+                  (element) =>
+                    "Doc: " +
+                    element.substring(0, 3) +
+                    "..." +
+                    element.slice(-4) +
+                    ";  "
+                )}
+              </Td>
+              <Td>
+                <Link to={`/modifyDemande/${row._id}`}>
+                  <HiPencilAlt color="#49be25" size="25px" />
                 </Link>
                 <span> </span>
                 <Link to="/">
-                <AiFillDelete color="red" size="25px"/>
+                  <AiFillDelete color="red" size="25px" />
                 </Link>
               </Td>
             </Tr>

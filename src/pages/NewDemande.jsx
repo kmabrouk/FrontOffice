@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
+import Modal from "../components/Modal";
 const NewDemande = () => {
   const [procedures, setProcedures] = useState([]);
   const [nomDem, setNomDem] = useState("");
@@ -8,6 +9,11 @@ const NewDemande = () => {
   const [filesList, setFilesList] = useState({});
   const [files, setFiles] = useState([]);
   let docs = [];
+
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     requestProcedures();
@@ -55,20 +61,22 @@ const NewDemande = () => {
       console.log(request);
       let res = await fetch("http://localhost:3000/demandes", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: request,
       });
       let resJson = await res.json();
-      if (resJson.status === 200) {
+      if (res.status === 200) {
         setNomDem("");
         setProcedure("");
         setOwnerCin("");
-        // setMessage("User created successfully");
+        setMessage("Demande created successfully");
       } else {
-        // setMessage("Some error occured");
+        setMessage("Some error occured");
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setShowModal(true);
     }
   };
 
@@ -134,10 +142,25 @@ const NewDemande = () => {
           )
         )}
         <br />
+        {message === "Demande created successfully" ? (
+          <span>Demande effectué</span>
+        ) : (
+          <span></span>
+        )}
         <button className="button" type="submit">
           Submit
         </button>
-        {console.log(docs)}
+        {showModal ? (
+            <Modal>
+              <div>
+                <h1>gg</h1>
+                <div className="buttons">
+                  <a href="https://bit.ly/pet-adopt">Yes</a>
+                  <button onClick={navigate("/")}>Ok</button>
+                </div>
+              </div>
+            </Modal>
+          ) : null}
       </form>
     </div>
   );
