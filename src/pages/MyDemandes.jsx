@@ -5,7 +5,6 @@ import {
   Tr,
   Th,
   Td,
-  Span,
   Wrapper,
 } from "./MyDemandes.style";
 import { useEffect, useState } from "react";
@@ -18,7 +17,6 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
 const MyDemandes = () => {
   const [head, setHead] = useState([]);
 

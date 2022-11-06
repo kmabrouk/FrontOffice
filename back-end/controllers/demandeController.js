@@ -33,7 +33,7 @@ const CreateDemande = async (req, res) => {
     const demande = new Demande({
       nom:body.nom,
       procedure:body.procedure,
-      ownerCIN: body.ownerCin,
+      ownerCIN: body.ownerCIN,
       documents: body.documents
     });
     const createdDemande = await demande.save();

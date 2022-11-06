@@ -12,14 +12,15 @@ let demandeRoutes = require("./routes/demandes");
 let citoyenRoutes = require("./routes/citoyens");
 
 let indexRouter = require("./routes/index");
-
-let app1 = express();
-app1.disable("x-powered-by");
+let corsOptions = {
+  origin: 'http://localhost:1234',
+  optionsSuccessStatus: 200 // For legacy browser support
+};
 
 let helmet = require("helmet");
 let app = express();
 app.use(helmet.hidePoweredBy());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json()); // to accept json data
 
 app.use("/procedures", procedureRoutes);

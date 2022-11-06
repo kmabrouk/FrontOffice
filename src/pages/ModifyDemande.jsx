@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ModifyDemande = () => {
   const [procedures, setProcedures] = useState([]);
@@ -44,7 +43,6 @@ const ModifyDemande = () => {
   }, [procedure]);
 
   async function requestFilesList() {
-    //setFilesList([]);
     const res = await fetch(
       `http://localhost:3000/procedures/nom/${procedure}`
     );
@@ -72,7 +70,7 @@ const ModifyDemande = () => {
         body: request,
       });
       let resJson = await res.json();
-      if (res.status === 200) {
+      if (resJson.status === 200) {
         setNomDem("");
         setProcedure("");
         setOwnerCin("");
