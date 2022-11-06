@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 const NewDemande = () => {
   const [procedures, setProcedures] = useState([]);
   const [nomDem, setNomDem] = useState("");
+  const [ownerCin, setOwnerCin] = useState("");
   const [procedure, setProcedure] = useState("");
-  const [filesList, setFilesList] = useState({});
+  const [filesList, setFilesList] = useState([]);
   const [files, setFiles] = useState([]);
+  let docs = [];
 
   useEffect(() => {
     requestProcedures();
@@ -18,6 +20,9 @@ const NewDemande = () => {
   }
 
   useEffect(() => {
+    docs = [];
+    setFiles([]);
+    setFilesList([]);
     if (procedure.length === 0) {
       setFilesList([]);
     } else {
@@ -26,20 +31,47 @@ const NewDemande = () => {
   }, [procedure]);
 
   async function requestFilesList() {
-    setFilesList([]);
+    //setFilesList([]);
     const res = await fetch(
       `http://localhost:3000/procedures/nom/${procedure}`
     );
     const json = await res.json();
     setFilesList(json);
-    filesList.map((element) => {
-      setFiles(element.documents);
-    });
+    //the mapping appearntly doesnt untill next render
+    // filesList.map((element) => {
+    //   setFiles(element.documents);
+    // });
   }
+
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await fetch("http://localhost:3000/demandes", {
+        method: "POST",
+        body: JSON.stringify({
+          nom: nomDem,
+          procedure: procedure,
+          ownerCIN: ownerCin,
+          documents: docs,
+        }),
+      });
+      let resJson = await res.json();
+      if (res.status === 200) {
+        setNomDem("");
+        setProcedure("");
+        setOwnerCin("");
+        setMessage("User created successfully");
+      } else {
+        setMessage("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="DemandePage">
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="nomDem">
           Nom demande:
           <input
@@ -47,6 +79,16 @@ const NewDemande = () => {
             value={nomDem}
             placeholder="Ex: Demande d'acte de naissance"
             onChange={(e) => setNomDem(e.target.value)}
+          />
+        </label>
+        <br />
+        <label htmlFor="ownerCin">
+          CIN:
+          <input
+            id="ownerCin"
+            value={ownerCin}
+            placeholder="Ex: IA3737"
+            onChange={(e) => setOwnerCin(e.target.value)}
           />
         </label>
         <br />
@@ -70,18 +112,29 @@ const NewDemande = () => {
             ))}
           </select>
         </label>
-        {!files.length ? (
+        {!procedure ? (
           <span></span>
         ) : (
-          files.map((file) => (
-            <label htmlFor={file}>
-              {file}
-              <input type="file" />
-            </label>
-          ))
+          filesList.map((element) =>
+            element.documents.map((file) => (
+              <label htmlFor={file} key={file}>
+                {file}
+                <input
+                  type="file"
+                  name={file}
+                  onChange={(event) => {
+                    docs.push(event.target.files[0].name);
+                  }}
+                />
+              </label>
+            ))
+          )
         )}
         <br />
-        <button className="button">Submit</button>
+        <button className="button" type="submit">
+          Submit
+        </button>
+        {console.log(docs)}
       </form>
     </div>
   );
