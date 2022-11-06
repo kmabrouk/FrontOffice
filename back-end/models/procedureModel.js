@@ -7,7 +7,7 @@ let ProcedureSchema = new Schema({
     required: true,
   },
   documents: {
-    type: [Buffer]
+    type: [String]
   }
 });
 

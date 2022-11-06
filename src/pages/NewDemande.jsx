@@ -5,7 +5,7 @@ const NewDemande = () => {
   const [nomDem, setNomDem] = useState("");
   const [ownerCin, setOwnerCin] = useState("");
   const [procedure, setProcedure] = useState("");
-  const [filesList, setFilesList] = useState([]);
+  const [filesList, setFilesList] = useState({});
   const [files, setFiles] = useState([]);
   let docs = [];
 
@@ -46,23 +46,26 @@ const NewDemande = () => {
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const request = JSON.stringify({
+        nom: nomDem,
+        procedure: procedure,
+        ownerCIN: ownerCin,
+        documents: docs,
+      });
+      console.log(request);
       let res = await fetch("http://localhost:3000/demandes", {
         method: "POST",
-        body: JSON.stringify({
-          nom: nomDem,
-          procedure: procedure,
-          ownerCIN: ownerCin,
-          documents: docs,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: request,
       });
       let resJson = await res.json();
-      if (res.status === 200) {
+      if (resJson.status === 200) {
         setNomDem("");
         setProcedure("");
         setOwnerCin("");
-        setMessage("User created successfully");
+        // setMessage("User created successfully");
       } else {
-        setMessage("Some error occured");
+        // setMessage("Some error occured");
       }
     } catch (err) {
       console.log(err);

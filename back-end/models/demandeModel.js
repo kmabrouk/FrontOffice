@@ -13,7 +13,7 @@ let DemandeSchema = new Schema({
       type: String
     },
     documents: {
-      type: [String]
+      type: [Buffer]
     }
   });
   
