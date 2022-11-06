@@ -7,16 +7,7 @@ const NewDemande = () => {
   const [procedure, setProcedure] = useState("");
   const [filesList, setFilesList] = useState([]);
   const [files, setFiles] = useState([]);
-  const docs = [];
-  //for documents
-  const [selectedFile, setSelectedFile] = useState("");
-  const [isSelected, setIsSelected] = useState(false);
-
-  const changeFileHandler = (event) => {
-    setSelectedFile(event.target.files[0].name);
-    setIsSelected(true);
-    docs.push(selectedFile);
-  };
+  let docs = [];
 
   useEffect(() => {
     requestProcedures();
@@ -29,7 +20,9 @@ const NewDemande = () => {
   }
 
   useEffect(() => {
-    //setFiles([]);
+    docs = [];
+    setFiles([]);
+    setFilesList([]);
     if (procedure.length === 0) {
       setFilesList([]);
     } else {
@@ -38,15 +31,16 @@ const NewDemande = () => {
   }, [procedure]);
 
   async function requestFilesList() {
-    setFilesList([]);
+    //setFilesList([]);
     const res = await fetch(
       `http://localhost:3000/procedures/nom/${procedure}`
     );
     const json = await res.json();
     setFilesList(json);
-    filesList.map((element) => {
-      setFiles(element.documents);
-    });
+    //the mapping appearntly doesnt untill next render
+    // filesList.map((element) => {
+    //   setFiles(element.documents);
+    // });
   }
 
   let handleSubmit = async (e) => {
@@ -118,15 +112,23 @@ const NewDemande = () => {
             ))}
           </select>
         </label>
-        {!files.length ? (
+        {!procedure ? (
           <span></span>
         ) : (
-          files.map((file) => (
-            <label htmlFor={file} key={file}>
-              {file}
-              <input type="file" name={file} onChange={changeFileHandler} />
-            </label>
-          ))
+          filesList.map((element) =>
+            element.documents.map((file) => (
+              <label htmlFor={file} key={file}>
+                {file}
+                <input
+                  type="file"
+                  name={file}
+                  onChange={(event) => {
+                    docs.push(event.target.files[0].name);
+                  }}
+                />
+              </label>
+            ))
+          )
         )}
         <br />
         <button className="button" type="submit">
