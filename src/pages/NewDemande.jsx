@@ -12,12 +12,16 @@ const NewDemande = () => {
 
   const navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
+
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     requestProcedures();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (isSubmited === true) setMessage("Demande created successfully");
+  }, [isSubmited]); // eslint-disable-line react-hooks/exhaustive-deps
   //runs only on the first render
   async function requestProcedures() {
     const res = await fetch(`http://localhost:3000/procedures`);
@@ -64,10 +68,7 @@ const NewDemande = () => {
         body: request,
       });
       let resJson = await res.json();
-      if (resJson.status === 200) {
-        setNomDem("");
-        setProcedure("");
-        setOwnerCin("");
+      if (res.status === 200) {
         setMessage("Demande created successfully");
       } else {
         setMessage("Some error occured");
@@ -75,7 +76,7 @@ const NewDemande = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      setShowModal(true);
+      setIsSubmited(true);
     }
   };
 
@@ -141,15 +142,16 @@ const NewDemande = () => {
           )
         )}
         <br />
-        {message === "Demande created successfully" ? (
-          <span>Demande effectué</span>
-        ) : (
-          <span></span>
-        )}
+
         <button className="button" type="submit">
           Submit
         </button>
-        {showModal ? (
+        {message === "Demande created successfully" ? (
+          <span className="validate">Demande effectué</span>
+        ) : (
+          <span></span>
+        )}
+        {/* {showModal ? (
             <Modal>
               <div>
                 <h1>gg</h1>
@@ -159,7 +161,7 @@ const NewDemande = () => {
                 </div>
               </div>
             </Modal>
-          ) : null}
+          ) : null} */}
       </form>
     </div>
   );

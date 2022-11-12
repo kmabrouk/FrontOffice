@@ -178,3 +178,6 @@ button:active  {
     display: inline-block;
     margin-right: 15px;
   }
+  .validate{
+    color: green;
+  }

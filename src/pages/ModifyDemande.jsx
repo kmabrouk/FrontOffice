@@ -103,7 +103,7 @@ const ModifyDemande = () => {
           <input
             id="ownerCin"
             value={ownerCin}
-            placeholder="Ex: IA3737"
+            placeholder={demande.ownerCIN}
             onChange={(e) => setOwnerCin(e.target.value)}
           />
         </label>
